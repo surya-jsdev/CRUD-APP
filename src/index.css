@@ -1,0 +1,14 @@
+
+.container{
+  padding: 10px;
+  margin: 0 0 0 10px;
+}
+.container label ,input{
+  margin: 0 0 0 5px;
+  padding: 5px;
+}
+button{
+  padding: 5px;
+  margin: 10px;
+  width: 150px;
+}
