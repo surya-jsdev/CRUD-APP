@@ -4,10 +4,9 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+let nextId=1;
 let users = [
-  { id: 1, name: "Surya", role: "Developer" },
-  { id: 2, name: "Surya", role: "Developer" },{ id: 3, name: "Surya", role: "Developer" }
+  // { id: 1, name: "Surya", role: "Developer" },
 ];
 
 app.get("/users", (req, res) => {
@@ -16,7 +15,7 @@ app.get("/users", (req, res) => {
 
 app.post("/users", (req, res) => {
   const newUser = {
-    id: Date.now(),
+    id: nextId++,
     ...req.body
   };
   users.push(newUser);

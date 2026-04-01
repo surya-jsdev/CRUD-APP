@@ -4,12 +4,14 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
+  const [salary, setSalary] = useState();
   const [editId, setEditId] = useState(null);
-
+  const [error, setError] = useState("");
   const API = "http://localhost:5000/users";
 
   // READ
   const fetchUsers = async () => {
+
     const response = await fetch(API);
     const data = await response.json();
     setUsers(data);
@@ -21,8 +23,14 @@ export default function App() {
 
   // CREATE + UPDATE
   const handleSubmit = async () => {
-    const userData = { name, role };
+    const userData = { name, role, salary };
+    if (!name || !role || !salary) {
+      setError("please Fill All Field");
+      return;
 
+    } else {
+      setError("")
+    }
     if (editId) {
       await fetch(`${API}/${editId}`, {
         method: "PUT",
@@ -45,6 +53,7 @@ export default function App() {
 
     setName("");
     setRole("");
+    setSalary("");
     fetchUsers();
   };
 
@@ -61,6 +70,7 @@ export default function App() {
   const editUser = (user) => {
     setName(user.name);
     setRole(user.role);
+    setSalary(user.salary);
     setEditId(user.id);
   };
 
@@ -81,23 +91,53 @@ export default function App() {
         value={role}
         onChange={(e) => setRole(e.target.value)}
       />
+      <input
+        type="text"
+        placeholder="Enter Salary"
+        value={salary}
+        onChange={(e) => setSalary(e.target.value)}
+      />
 
       <button onClick={handleSubmit}>
         {editId ? "Update" : "Add"}
       </button>
-
+      {error && <p>{error}</p>}
       {users.map((user) => (
-        <div key={user.id}>
-          <p>{user.name} - {user.role}</p>
+        <table>
+          <th>
+            <td>S:No</td>
+            <td>Name</td>
+            <td>Role</td>
+            <td>Salary</td>
+          </th>
+          <tr>
+            <td key={user.id}>{user.id}</td>
+            <td>{user.name}</td>
+            <td>{user.role}</td>
+            <td>{user.salary}</td>
+            <td>
+              <button onClick={() => editUser(user)}>
+                Edit
+              </button>
+            </td>
+            <td>
+              <button onClick={() => deleteUser(user.id)}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        </table>
+        // <div key={user.id}>
+        //   <p>{user.id} {user.name} - {user.role} -{user.salary}</p>
 
-          <button onClick={() => editUser(user)}>
-            Edit
-          </button>
+        //   <button onClick={() => editUser(user)}>
+        //     Edit
+        //   </button>
 
-          <button onClick={() => deleteUser(user.id)}>
-            Delete
-          </button>
-        </div>
+        //   <button onClick={() => deleteUser(user.id)}>
+        //     Delete
+        //   </button>
+        // </div>
       ))}
     </div>
   );
