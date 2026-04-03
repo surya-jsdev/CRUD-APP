@@ -1,14 +1,39 @@
-
-.container{
-  padding: 10px;
+.container {
+  /* padding: 10px; */
   margin: 0 0 0 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
-.container label ,input{
+
+.container label,
+input {
   margin: 0 0 0 5px;
   padding: 5px;
+  justify-self: center;
+  display: inline-block;
 }
-button{
+
+button {
   padding: 5px;
   margin: 10px;
   width: 150px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  background-color: #1b1c1c23;
+  text-align: left;
+  padding: 5px;
+}
+.deletebtn{
+background-color: rgb(255, 55, 0);
+color: white;
 }

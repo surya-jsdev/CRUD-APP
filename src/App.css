@@ -161,6 +161,70 @@
   }
 }
 
+.crud-controls {
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.crud-controls button {
+  border: 1px solid #666;
+  background: #fafafa;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.crud-controls button.active {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+.crud-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.crud-table th,
+.crud-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.crud-table th {
+  background: #f1f5f9;
+  color: #111;
+  cursor: pointer;
+  user-select: none;
+}
+
+.crud-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.crud-table tr:hover {
+  background: #f0f8ff;
+}
+
+.crud-table .actions button {
+  margin-right: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.crud-table .actions .deletebtn {
+  color: #a00;
+  border-color: #e0b4b4;
+}
+
 .ticks {
   position: relative;
   width: 100%;
