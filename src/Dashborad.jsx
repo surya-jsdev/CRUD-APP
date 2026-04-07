@@ -7,8 +7,6 @@ export default function App() {
   const [salary, setSalary] = useState();
   const [editId, setEditId] = useState(null);
   const [error, setError] = useState("");
-  // const [sortBy, setSortBy] = useState("id");
-  // const [sortDir, setSortDir] = useState("asc");
   const API = "http://localhost:5000/users";
 
 
@@ -24,16 +22,15 @@ export default function App() {
     fetchUsers();
   }, []);
 
-  // CREATE + UPDATE
+  // Create And Update
+
   const handleSubmit = async () => {
     const userData = { name, role, salary };
     if (!name || !role || !salary) {
-      setError("please Fill All Field");
+      setError("Please fill all fields");
       return;
-
-    } else {
-      setError("")
     }
+    setError("")
     if (editId) {
       await fetch(`${API}/${editId}`, {
         method: "PUT",
@@ -108,7 +105,7 @@ export default function App() {
         </button>
       </div>
 
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
       <table className="crud-table">
         <thead>
           <tr>
@@ -120,9 +117,9 @@ export default function App() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {users.map((user, index) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
+              <td>{index + 1}.</td>
               <td>{user.name}</td>
               <td>{user.role}</td>
               <td>{user.salary}</td>

@@ -8,18 +8,27 @@
 
 .container label,
 input {
-  margin: 0 0 0 5px;
-  padding: 5px;
+  width: 200px;
+  margin: 0 10px 20px 5px;
+  border-radius: 10px;
+  border: none;
+  border: 1px solid grey;
+  padding: 10px;
   justify-self: center;
   display: inline-block;
+
 }
 
 button {
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
   width: 150px;
+  background-color: green;
+  color: white;
 }
-
+.error{
+  color: red;
+}
 table,
 th,
 td {
@@ -28,11 +37,12 @@ td {
 }
 
 th,
-td {
+td{
   background-color: #1b1c1c23;
   text-align: left;
   padding: 5px;
 }
+
 .deletebtn{
 background-color: rgb(255, 55, 0);
 color: white;

@@ -4,9 +4,9 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-let nextId=1;
+let nextId = 1;
 let users = [
-  // { id: 1, name: "Surya", role: "Developer" },
+  { id: nextId++, name: "Surya", role: "Developer", salary: "3LPA" },
 ];
 
 app.get("/users", (req, res) => {
