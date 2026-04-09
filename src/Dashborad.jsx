@@ -2,62 +2,78 @@ import React, { useEffect, useState } from "react";
 
 export default function App() {
   const [users, setUsers] = useState([]);
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [salary, setSalary] = useState();
+  const [data, setData] = useState({
+    name: "",
+    role: "",
+    salary:'',
+  });
   const [editId, setEditId] = useState(null);
   const [error, setError] = useState("");
+
   const API = "http://localhost:5000/users";
 
 
-  // READ
-  const fetchUsers = async () => {
+  const handleInput = (e) => {
+    const { name, value } = e.target;
 
+    setData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+ 
+  const fetchUsers = async () => {
     const response = await fetch(API);
-    const data = await response.json();
-    setUsers(data);
+    const result = await response.json();
+    setUsers(result);
   };
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // Create And Update
-
+ 
   const handleSubmit = async () => {
-    const userData = { name, role, salary };
-    if (!name || !role || !salary) {
+    if (!data.name || !data.role || !data.salary) {
       setError("Please fill all fields");
       return;
     }
-    setError("")
+
+    setError("");
+
     if (editId) {
+      
       await fetch(`${API}/${editId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(data)
       });
 
       setEditId(null);
     } else {
+      
       await fetch(API, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(data)
       });
     }
 
-    setName("");
-    setRole("");
-    setSalary("");
+  
+    setData({
+      name: "",
+      role: "",
+      salary: ""
+    });
+
     fetchUsers();
   };
 
-  // DELETE
   const deleteUser = async (id) => {
     await fetch(`${API}/${id}`, {
       method: "DELETE"
@@ -66,66 +82,74 @@ export default function App() {
     fetchUsers();
   };
 
-  // EDIT
+
   const editUser = (user) => {
-    setName(user.name);
-    setRole(user.role);
-    setSalary(user.salary);
+    setData({
+      name: user.name,
+      role: user.role,
+      salary: user.salary
+    });
+
     setEditId(user.id);
   };
 
-
   return (
     <div className="container">
-      <div>
-        <h1>CRUD App using Fetch</h1>
+      <h1>CRUD App using Fetch</h1>
 
-        <input
-          type="text"
-          placeholder="Enter Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter Name"
+        value={data.name}
+        onChange={handleInput}
+      />
 
-        <input
-          type="text"
-          placeholder="Enter Role"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter Salary"
-          value={salary}
-          onChange={(e) => setSalary(e.target.value)}
-        />
+      <input
+        type="text"
+        name="role"
+        placeholder="Enter Role"
+        value={data.role}
+        onChange={handleInput}
+      />
 
-        <button onClick={handleSubmit}>
-          {editId ? "Update" : "Add"}
-        </button>
-      </div>
+      <input
+        type="number"
+        name="salary"
+        placeholder="Enter Salary"
+        value={data.salary}
+        onChange={handleInput}
+      />
+
+      <button onClick={handleSubmit}>
+        {editId ? "Update" : "Add"}
+      </button>
 
       {error && <p className="error">{error}</p>}
+
       <table className="crud-table">
         <thead>
           <tr>
-            <th onClick={() => handleSort('id')}>S:No</th>
-            <th onClick={() => handleSort('name')}>Name</th>
-            <th onClick={() => handleSort('role')}>Role</th>
-            <th onClick={() => handleSort('salary')}>Salary</th>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Salary</th>
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
           {users.map((user, index) => (
             <tr key={user.id}>
-              <td>{index + 1}.</td>
+              <td>{index + 1}</td>
               <td>{user.name}</td>
               <td>{user.role}</td>
               <td>{user.salary}</td>
-              <td className="actions">
+              <td>
                 <button onClick={() => editUser(user)}>Edit</button>
-                <button className="deletebtn" onClick={() => deleteUser(user.id)}>Delete</button>
+                <button onClick={() => deleteUser(user.id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
