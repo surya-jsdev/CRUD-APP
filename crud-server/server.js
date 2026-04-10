@@ -1,16 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-
+const port = 5000;
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://crud-app-silk-one.vercel.app"
+}));
 app.use(express.json());
+
 let nextId = 1;
 let users = [{ id: nextId, name: "Surya", role: "Developer", salary: "3LPA" }];
 nextId++
+
+// get Users
 app.get("/users", (req, res) => {
   res.json(users);
 });
 
+// Post Users
 app.post("/users", (req, res) => {
   const newUser = {
     id: nextId++,
@@ -20,6 +26,7 @@ app.post("/users", (req, res) => {
   res.status(201).json(newUser);
 });
 
+// Update Users
 app.put("/users/:id", (req, res) => {
   const id = Number(req.params.id);
 
@@ -30,6 +37,7 @@ app.put("/users/:id", (req, res) => {
   res.json({ message: "Updated successfully" });
 });
 
+// Delete Users
 app.delete("/users/:id", (req, res) => {
   const id = Number(req.params.id);
 
@@ -37,6 +45,7 @@ app.delete("/users/:id", (req, res) => {
   res.json({ message: "Deleted successfully" });
 });
 
-app.listen(5000, () => {
+// Port
+app.listen(port, () => {
   console.log("Server running on port 5000");
 });
