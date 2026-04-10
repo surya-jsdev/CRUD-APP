@@ -5,10 +5,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 let nextId = 1;
-let users = [
-  { id: nextId++, name: "Surya", role: "Developer", salary: "3LPA" },
-];
-
+let users = [{ id: nextId, name: "Surya", role: "Developer", salary: "3LPA" }];
+nextId++
 app.get("/users", (req, res) => {
   res.json(users);
 });
@@ -36,7 +34,6 @@ app.delete("/users/:id", (req, res) => {
   const id = Number(req.params.id);
 
   users = users.filter(user => user.id !== id);
-
   res.json({ message: "Deleted successfully" });
 });
 

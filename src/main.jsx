@@ -1,11 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Dashborad from './Dashborad.jsx'
+import App from './Table.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <App /> */}
-    <Dashborad />
+    <App />
   </StrictMode>,
 )
