@@ -18,32 +18,50 @@ input {
   display: inline-block;
 
 }
-
+.Formcontainer{
+  background-color: rgba(70, 69, 69, 0.237);
+  width: 90%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+label{
+  border: none;
+}
 button {
   padding: 10px;
   margin: 10px;
   width: 150px;
+  border-radius: 10px;
   background-color: green;
   color: white;
 }
-.error{
+
+.error {
   color: red;
 }
-table,
-th,
-td {
-  border: 1px solid black;
+
+/* table, */
+table {
   border-collapse: collapse;
+  width: 90%;
 }
 
 th,
-td{
+td {
+  width: 1200px;
+  border: 1px solid black;
+
+}
+
+th,
+td {
   background-color: #1b1c1c23;
   text-align: left;
   padding: 5px;
 }
 
-.delete{
-background-color: rgb(255, 55, 0);
-color: white;
+.delete {
+  background-color: rgb(255, 55, 0);
+  color: white;
 }

@@ -21,7 +21,7 @@ export default function App() {
     }));
   };
 
-// FetchUser
+  // FetchUser
   const fetchUsers = async () => {
     const response = await fetch(API);
     const result = await response.json();
@@ -32,7 +32,7 @@ export default function App() {
     fetchUsers();
   }, []);
 
-// Handle Submit
+  // Handle Submit
   const handleSubmit = async () => {
     if (!data.name || !data.role || !data.salary) {
       setError("Please fill all fields");
@@ -89,8 +89,10 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>CRUD App using Fetch</h1>
-      <div>
+      <h1>CRUD App</h1>
+      <div className="Formcontainer">
+        <label htmlFor="name">Name:</label>
+
         <input
           type="text"
           name="name"
@@ -98,7 +100,7 @@ export default function App() {
           value={data.name}
           onChange={handleInput}
         />
-
+        <label htmlFor="Role">Role:</label>
         <input
           type="text"
           name="role"
@@ -106,7 +108,7 @@ export default function App() {
           value={data.role}
           onChange={handleInput}
         />
-
+        <label htmlFor="salary">Salary:</label>
         <input
           type="text"
           name="salary"
@@ -119,8 +121,9 @@ export default function App() {
           {editId ? "Update" : "Add"}
         </button>
       </div>
+
       {error && <p className="error">{error}</p>}
-{/* Dispaly Data in table */}
+      {/* Dispaly Data in table */}
       <table className="crud-table">
         <thead>
           <tr>
@@ -135,7 +138,7 @@ export default function App() {
         <tbody>
           {users.map((user, index) => (
             <tr key={user.id}>
-              <td>{index + 1}</td>
+              <td>{index + 1}.</td>
               <td>{user.name}</td>
               <td>{user.role}</td>
               <td>{user.salary}</td>

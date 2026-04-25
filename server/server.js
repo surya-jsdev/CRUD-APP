@@ -2,9 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const port = 5000;
 const app = express();
-app.use(cors({
-  origin: "https://crud-app-silk-one.vercel.app"
-}));
+app.use(cors());
 app.use(express.json());
 
 let nextId = 1;
